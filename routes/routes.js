@@ -70,7 +70,6 @@ router.post("/scrape", function(req, res) {
         $set: { isSaved: true }
       }
     ).then(function(results) {
-      console.log("Article is saved");
       res.json(results);
     });
   });

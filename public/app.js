@@ -4,7 +4,6 @@ $(function() {
 
     let artId = $(this).data("id");
     console.log(artId);
-    alert("The article was saved!");
 
     $.ajax("/save/article/" + artId, {
       type: "PUT"

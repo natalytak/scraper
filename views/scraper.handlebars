@@ -8,18 +8,18 @@
   <div class="collapse navbar-collapse" id="navbarColor01">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <button class="nav-link" href="/">Home
+        <a class="nav-link" href="/">Home
           <span class="sr-only">(current)</span>
-        </button>
+        </a>
       </li>
       <li class="nav-item">
-        <button class="nav-link" href="/saved">Saved Articles</button>
+        <a class="nav-link" href="/saved">Saved Articles</a>
       </li>
       <li class="nav-item">
-        <button class="btn btn-danger scrape-new">SCRAPE NEW ARTICLES!</button>
+        <a class="btn btn-danger scrape-new" action="/scrape" method="POST">SCRAPE NEW ARTICLES!</a>
       </li>
       <li class="nav-item">
-        <button class="btn btn-danger clear">CLEAR ARTICLES!</button>
+        <a class="btn btn-danger clear">CLEAR ARTICLES!</a>
       </li>
     </ul>
   </div>
@@ -64,7 +64,7 @@
     </div>
   </div>
   {{/unless}} --}}
-</div>
+{{!-- </div> --}}
 
 {{!-- <footer class="footer">
   <div class="container">
@@ -93,8 +93,6 @@
         <tr>
           <th id="title">Title</th>
           <th id="desc">Description</th>
-          <th id="link">Link</th>
-          <th id="edit">Note</th>
           <th id="save">Save</th>
         </tr>
       </thead>
@@ -102,10 +100,8 @@
                     {{#each articles}}
                     {{!-- <form action="/" method="GET"> --}}
                         <tr>
-                            <td>{{title}}</td>
+                            <td><a target="_blank" href="{{this.link}}">{{this.title}}</a></td>
                             <td>{{desc}}</td>
-                            <td>{{link}}</td>
-                            <td><button type="note" class="btn btn-warning ">Note</button></td>
                             <td><button type="save" class="btn btn-warning saveBtn" data-id={{id}}>Save</button></td>
                         </tr>
                     </form>

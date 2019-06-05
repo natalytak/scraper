@@ -10,7 +10,7 @@
   /* margin-top: 10px;
   margin-bottom: 10px; */
   /* margin-left: 10px; */
-  font-weight: 800;
+  font-weight: bold;
   color: dimgrey;
 }
 
@@ -20,6 +20,6 @@
 }
 
 .navbar-nav > li > a.scrape-new:active {
-  background: #e51c23;
+  background: black;
 }
 
