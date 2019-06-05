@@ -1,89 +1,81 @@
-// Using the tools and techniques you learned so far,
-// you will scrape a website of your choice, then place the data
-// in a MongoDB database. Be sure to make the database and collection
-// before running this exercise.
-
-// Consult the assignment files from earlier in class
-// if you need a refresher on Cheerio.
-
 // Dependencies
-var express = require("express");
-var mongojs = require("mongojs");
+const express = require("express");
+const mongoose = require("mongoose");
+const logger = require("morgan");
 // Require axios and cheerio. This makes the scraping possible
-var axios = require("axios");
-var cheerio = require("cheerio");
+// const axios = require("axios");
+// const cheerio = require("cheerio");
+
+// const Articles = require("./models/articlesModel.js/index.js");
 
 // Initialize Express
-var app = express();
+const app = express();
 
-// Database configuration
-var databaseUrl = "hackernews";
-var collections = ["articles"];
+const routes = require("./routes/routes");
+app.use(routes);
 
+app.use(logger("dev"));
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(express.static("public"));
 
-// Hook mongojs configuration to the db variable
-var db = mongojs(databaseUrl, collections);
-db.on("error", function(error) {
-  console.log("Database Error:", error);
-});
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/hackernews";
+mongoose.connect(MONGODB_URI);
 
-// Main route (simple Hello World Message)
-app.get("/", function(req, res) {
-  res.send("Hello world");
-});
+// Sets up the Express app to handle data parsing
+const exphbs = require("express-handlebars");
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
 
-// TODO: make two more routes
+
+// app.get("/scrape", function(req, res) {
+//   axios.get("https://thehackernews.com/").then(function(response) {
+//   const $ = cheerio.load(response.data);
+//   // console.log(response.data);
+//   const results = [];
+//   $("div.body-post").each(function(i, element) {
+//     const title = $(element).children().find(".home-right").find("h2").text();
+//     const link = $(element).find("a").attr("href");
+//     const desc = $(element).children().find(".home-desc").text();
+    
+//     results.push({
+//       title: title,
+//       desc: desc,
+//       link: link,
+//     });
+//     console.log(results);
+
+//   Articles.create(results)
+//     .then(function(dbArticles) {
+//       // If saved successfully, send the the new User document to the client
+//       console.log(dbArticles);
+//     })
+//     .catch(function(err) {
+//       res.json(err);
+//     });
+// });
+// db.Articles.insert({title: results[i].title, desc: results[i].desc, link: results[i].link});
+// res.send("Saved to db");
+//   });
+// });
+
 
 // Route 1
 // =======
-app.get("/all", function(req, res) {
-  db.articles.find({}, function(error, found) {
-    if (error) {
-      console.log(error);
-    }
-    else {
-      res.json(found);
-    }
-  });
+// app.get("/", function(req, res) {
+//   db.articles.find({}, function(error, found) {
+//     if (error) {
+//       console.log(error);
+//     }
+//     else {
+//       res.json(found);
+//     }
+//   });
 
-});
-// This route will retrieve all of the data
-// from the scrapedData collection as a json (this will be populated
-// by the data you scrape using the next route)
+// });
 
-// Route 2
 
-axios.get("https://thehackernews.com/").then(function(response) {
-  console.log("connected...");
-  var $ = cheerio.load(response.data);
-  var results = [];
-  $("div.body-post").each(function(i, element) {
-    // var title = $(element).children().text();
-    var link = $(element).find("a").attr("href");
-    var title = $(element).children().children().find("div").attr("h2.home-title");
-    var desc = $(element).children().text();
-    console.log(title);
-    
-    results.push({
-      title: title,
-      link: link,
-      desc: desc
-    });
-    db.articles.insert({title: results[i].title, link: results[i].link, desc: results[i].desc});
-  });
-  console.log(results);
-});
-
-// =======
-// When you visit this route, the server will
-// scrape data from the site of your choice, and save it to
-// MongoDB.
-// TIP: Think back to how you pushed website data
-// into an empty array in the last class. How do you
-// push it into a MongoDB collection instead?
-
-/* -/-/-/-/-/-/-/-/-/-/-/-/- */
 
 // Listen on port 3000
 app.listen(3000, function() {

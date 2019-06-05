@@ -1,0 +1,25 @@
+.navbar {
+    margin-bottom: 0;
+  }  
+
+.navbar-nav > li > a.scrape-new,
+/* .navbar-nav > li > a.nav-link, */
+.navbar-nav > li > a.clear {
+  padding: 10px;
+  margin: 10px;
+  /* margin-top: 10px;
+  margin-bottom: 10px; */
+  /* margin-left: 10px; */
+  font-weight: 800;
+  color: dimgrey;
+}
+
+.navbar-nav > li > a.scrape-new:hover,
+.navbar-nav > li > a.clear:hover {
+  background: #4caf50;
+}
+
+.navbar-nav > li > a.scrape-new:active {
+  background: #e51c23;
+}
+
