@@ -63,13 +63,33 @@ router.post("/scrape", function(req, res) {
     let artId = req.params.id;
   
     Articles.findOneAndUpdate(
-      { _id: artId },
+      { 
+        _id: artId
+      },
       {
         $set: { isSaved: true }
       }
-    ).then(function(result) {
+    ).then(function(results) {
       console.log("Article is saved");
-      res.json(result);
+      res.json(results);
+    });
+  });
+
+  router.put("/delete/articles/:id", function(req, res) {
+    let artId = req.params.id;
+  
+    Articles.findOneAndUpdate(
+      { 
+        _id: artId 
+      },
+      {
+        $set: { isSaved: false }
+      }
+    ).then(function(results) {
+      console.log(results);
+      res.render("saved", { articles: results });
+      res.send(results);
+      // res.json(results);
     });
   });
 

@@ -2,22 +2,30 @@ $(function() {
   $(".saveBtn").on("click", function(event) {
     event.preventDefault();
 
-    // $(".articleSavedBody").empty();
-
     let artId = $(this).data("id");
     console.log(artId);
+    alert("The article was saved!");
 
     $.ajax("/save/article/" + artId, {
       type: "PUT"
     }).then(function() {
-      console.log("Article is saved!");
-      // let newText = $("<div>");
-      // newText.text("Article is Saved");
-      // $(".articleSavedBody").append(newText);
-      // $("#articleSavedModal").modal("show");
+      alert("Article is saved!");
     });
   });
+
+$(".deleteBtn").on("click", function(event) {
+
+  let artId = $(this).data("id");
+
+  $.ajax("/delete/articles/" + artId, {
+    type: "PUT"
+  }).then(function() {
+    alert("Article was deleted!");
+  });
 });
+
+});
+
 
 
 // function displayResults(articles) {
