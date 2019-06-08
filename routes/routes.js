@@ -87,8 +87,6 @@ router.post("/scrape", function(req, res) {
     ).then(function(results) {
       console.log(results);
       res.render("saved", { articles: results });
-      res.send(results);
-      // res.json(results);
     });
   });
 
