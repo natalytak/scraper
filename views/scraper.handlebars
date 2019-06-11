@@ -16,7 +16,7 @@
         <a class="nav-link" href="/saved">Saved Articles</a>
       </li>
       <li class="nav-item">
-        <a class="btn btn-danger scrape-new" action="/scrape" method="POST">SCRAPE NEW ARTICLES!</a>
+        <a class="btn btn-danger scrape-news" action="/scrape" method="POST">SCRAPE NEW ARTICLES!</a>
       </li>
       <li class="nav-item">
         <a class="btn btn-danger clear">CLEAR ARTICLES!</a>
@@ -25,27 +25,27 @@
   </div>
 </nav>
 
-{{!-- <div class="jumbotron text-center">
+<div class="jumbotron text-center">
   <div class="overlay">
-  </div> --}}
-  {{!-- <div class="background-image">
-  </div> --}}
-  {{!-- <div class="caption">
+  </div>
+  <div class="background-image">
+  </div>
+  <div class="caption">
     <h3 class="header">The Hacker News Articles</h3>
-  </div> --}}
-{{!-- </div> --}}
-{{!-- <div class="container-fluid article-container"> --}}
-  {{!-- {{#each articles}}
+  </div>
+ </div>
+<div class="container-fluid article-container">
+ {{#each articles}}
   <div data-_id="{{this._id}}" class="card">
     <div class="card-header">
-      <h3>
-        <a class="article-link" target="_blank" rel="noopener noreferrer" href="{{this.url}}">{{this.headline}}</a>
+      <h4>
+        <a class="article-link" target="_blank" rel="noopener noreferrer" href="{{this.link}}">{{this.title}}</a>
         <a class="btn btn-success save">Save Article</a>
-      </h3>
+      </h4>
     </div>
-    {{!-- <div class="card-body">{{this.summary}}</div> --}}
-  {{!-- </div> --}}
-  {{!-- {{/each}}  --}}
+    <div class="card-body">{{this.desc}}</div>
+</div>
+  {{/each}} 
   {{!-- {{ articles }}
   <div class='alert alert-warning text-center'>
     <h4>Uh Oh. Looks like we don't have any new articles.</h4>
@@ -72,22 +72,7 @@
   </div>
 </footer> --}}
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
-{{!-- <script src="/assets/javascript/index.js"></script> --}}
-
-
-
-
-
-
-<div class="container">
-    <h3 class="header">The Hacker News Articles</h3>
-    <!-- <div id="buttons">
-      <button class="btn" id="weight-sort">Sort By Weight</button>
-      <button class="btn" id="name-sort">Sort By Name</button>
-    </div> -->
+<div class="container-fluid news-container">
     <table id="results">
       <thead>
         <tr>
@@ -98,17 +83,20 @@
       </thead>
       <tbody>
                     {{#each articles}}
-                    {{!-- <form action="/" method="GET"> --}}
+                      <div data-_id="{{this._id}}" class="results">
                         <tr>
                             <td><a target="_blank" href="{{this.link}}">{{this.title}}</a></td>
-                            <td>{{desc}}</td>
-                            <td><button type="save" class="btn btn-warning saveBtn" data-id={{id}}>Save</button></td>
+                            <td>{{this.desc}}</td>
+                            <td><button type="save" class="btn btn-warning saveBtn" data-_id={{this.id}}>Save</button></td>
                         </tr>
-                    </form>
+                        </div>
                 </tbody>
                 {{/each}}
     </table>
 </div>
 
-<script src="./app.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+<script src="./js/app.js"></script>
 
