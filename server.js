@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const logger = require("morgan");
 const exphbs = require("express-handlebars");
 
-const port = process.env.PORT || 3000;
+// const port = process.env.PORT || 3000;
 
 // const Articles = require("./models/articlesModel.js/index.js");
 
@@ -28,6 +28,10 @@ app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 // Listen on port 3000
-app.listen(port, function() {
-  console.log(`App running on port ${port}!`);
+// app.listen(port, function() {
+//   console.log(`App running on port ${port}!`);
+// });
+
+app.listen(process.env.PORT || 3000, function(){
+  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
 });
