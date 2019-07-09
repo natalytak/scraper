@@ -1,8 +1,8 @@
 const router = require("express").Router();
 const articlesController = require("../controllers/Articles");
-const noteController = require("../controllers/note");
-const scrapeController = require("../controllers/scrape");
-const clearController = require("../controllers/clear");
+const noteController = require("../controllers/Note");
+const scrapeController = require("../controllers/Scrape");
+const clearController = require("../controllers/Clear");
 
 router.get("/", articlesController.findAll);
 router.delete("/:id", articlesController.delete);
